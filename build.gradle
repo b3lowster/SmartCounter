@@ -1,0 +1,29 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.1.3'
+    }
+}
+
+
+apply plugin: 'com.android.application'
+
+android {
+    lintOptions {
+        abortOnError false
+    }
+
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        targetSdkVersion 22
+    }
+}
+
+repositories { 
+    jcenter()
+}
