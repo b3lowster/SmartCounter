@@ -1,7 +1,8 @@
-package ua.startup.smartcounter;
+package ua.startup.smartcounter.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import ua.startup.smartcounter.R;
 
 public class MainActivity extends Activity {
 

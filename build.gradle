@@ -20,9 +20,22 @@ android {
 
     defaultConfig {
         targetSdkVersion 22
+        minSdkVersion 11
+    }
+    buildTypes {
+        release {
+            // in later versions of the Gradle plugin runProguard -> minifyEnabled
+            minifyEnabled true
+            proguardFile getDefaultProguardFile('proguard-android.txt')
+        }
     }
 }
 
-repositories { 
+repositories {
     jcenter()
+}
+
+dependencies {
+    compile 'com.github.satyan:sugar:1.3'
+    compile 'joda-time:joda-time:2.7'
 }
