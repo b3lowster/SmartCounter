@@ -12,6 +12,18 @@ public class Counter extends SugarRecord<Counter> {
     private DateTime recordTime;
 
     public Counter() {
+        this.counter = 1L;
+        this.recordTime = DateTime.now();
+    }
+
+    public Counter(Long counter) {
+        this.counter = counter;
+        this.recordTime = DateTime.now();
+    }
+
+    public Counter(Long counter, DateTime recordTime) {
+        this.counter = counter;
+        this.recordTime = recordTime;
     }
 
     public Long getCounter() {

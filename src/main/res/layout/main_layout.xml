@@ -5,9 +5,14 @@
               android:layout_height="fill_parent"
         >
     <Button
-            android:id="@+id/add_activity_button"
+            android:id="@+id/add_action_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/add_activity_button_title"
+            android:text="@string/add_action_button_title"
             />
+    <ListView
+            android:id="@+id/actions"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+    </ListView>
 </LinearLayout>

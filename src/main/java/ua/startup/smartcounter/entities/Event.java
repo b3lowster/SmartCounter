@@ -2,6 +2,8 @@ package ua.startup.smartcounter.entities;
 
 import com.orm.SugarRecord;
 
+import java.util.List;
+
 /**
  * @author tsv@ciklum.com
  */
@@ -11,6 +13,11 @@ public class Event extends SugarRecord<Event> {
     private Counter counter;
 
     public Event() {
+    }
+
+    public Event(String name) {
+        this.name = name;
+        this.counter = new Counter();
     }
 
     public Event(String name, Counter counter) {
@@ -33,4 +40,5 @@ public class Event extends SugarRecord<Event> {
     public void setCounter(Counter counter) {
         this.counter = counter;
     }
+
 }
