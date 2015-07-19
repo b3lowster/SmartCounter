@@ -1,20 +1,22 @@
 package ua.startup.smartcounter.activities;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
 import ua.startup.smartcounter.R;
+import ua.startup.smartcounter.adapters.EventAdapter;
 import ua.startup.smartcounter.entities.Event;
-import android.view.ViewGroup.LayoutParams;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends Activity {
 
     ListView listView;
+    final Context context = this;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,53 +27,50 @@ public class MainActivity extends Activity {
 
         List<Event> events = Event.listAll(Event.class);
 
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, getArrayEventsForListView(events));
+//        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+//                android.R.layout.simple_list_item_1, android.R.id.text1, getArrayEventsForListView(events));
+
+        final EventAdapter adapter = new EventAdapter(this, events);
 
         // Assign adapter to ListView
         listView.setAdapter(adapter);
 
-        final Button btnAddAction = (Button)findViewById(R.id.add_action_button);
+        final Button btnAddAction = (Button) findViewById(R.id.add_action_button);
         btnAddAction.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                LayoutInflater layoutInflater
-                        = (LayoutInflater)getBaseContext()
-                        .getSystemService(LAYOUT_INFLATER_SERVICE);
-                final View popupView = layoutInflater.inflate(R.layout.popup_layout, null);
+                // custom dialog
+                final Dialog dialog = new Dialog(context);
+                dialog.setContentView(R.layout.dialog_layout);
+                dialog.setTitle(R.string.action_name_field);
 
-                final PopupWindow popupWindow = new PopupWindow(
-                        popupView,
-                        LayoutParams.WRAP_CONTENT,
-                        LayoutParams.WRAP_CONTENT);
-
-                Button saveButton = (Button)popupView.findViewById(R.id.save_button);
-                saveButton.setOnClickListener(new Button.OnClickListener(){
+                Button saveButton = (Button) dialog.findViewById(R.id.save_button);
+                saveButton.setOnClickListener(new Button.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
-                        EditText textField = (EditText)popupView.findViewById(R.id.action_field);
+                        EditText textField = (EditText) dialog.findViewById(R.id.action_field);
                         Event event = new Event(textField.getText().toString());
                         event.save();
 
-                        adapter.add(textField.getText().toString());
+                        adapter.add(event);
                         adapter.notifyDataSetChanged();
-                        popupWindow.dismiss();
-                    }});
-
-                Button cancelButton = (Button)popupView.findViewById(R.id.cancel_button);
-                cancelButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        popupWindow.dismiss();
+                        dialog.dismiss();
                     }
                 });
 
-                popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+                Button cancelButton = (Button) dialog.findViewById(R.id.cancel_button);
+                cancelButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
             }
         });
-
     }
 
     @Override
@@ -79,11 +78,11 @@ public class MainActivity extends Activity {
         super.onStart();
     }
 
-    private String[] getArrayEventsForListView(List<Event> events) {
-        String[] array = new String[events.size()];
+    private List<String> getArrayEventsForListView(List<Event> events) {
+        List<String> array = new ArrayList<>(events.size());
 
-        for (int i = 0; i < events.size(); i++) {
-            array[i] = events.get(i).getName();
+        for (Event event : events) {
+            array.add(event.getName());
         }
 
         return array;

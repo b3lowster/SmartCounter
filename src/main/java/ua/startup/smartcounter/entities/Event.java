@@ -2,6 +2,7 @@ package ua.startup.smartcounter.entities;
 
 import com.orm.SugarRecord;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,19 +11,19 @@ import java.util.List;
 public class Event extends SugarRecord<Event> {
 
     private String name;
-    private Counter counter;
+    private List<DateEvent> dateEvents;
 
     public Event() {
     }
 
     public Event(String name) {
         this.name = name;
-        this.counter = new Counter();
+        this.dateEvents = new ArrayList<>();
     }
 
-    public Event(String name, Counter counter) {
+    public Event(String name, List<DateEvent> counter) {
         this.name = name;
-        this.counter = counter;
+        this.dateEvents = counter;
     }
 
     public String getName() {
@@ -33,12 +34,11 @@ public class Event extends SugarRecord<Event> {
         this.name = name;
     }
 
-    public Counter getCounter() {
-        return counter;
+    public List<DateEvent> getDateEvents() {
+        return dateEvents;
     }
 
-    public void setCounter(Counter counter) {
-        this.counter = counter;
+    public void setDateEvents(List<DateEvent> dateEvents) {
+        this.dateEvents = dateEvents;
     }
-
 }

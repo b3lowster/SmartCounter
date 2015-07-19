@@ -4,14 +4,9 @@
               android:layout_height="fill_parent"
               android:orientation="vertical"
               android:background="@android:color/background_dark">
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/action_name_field"/>
     <EditText
             android:inputType="text"
-            android:maxLength="10"
+            android:maxLength="20"
             android:id="@+id/action_field"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
