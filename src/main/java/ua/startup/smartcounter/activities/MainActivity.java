@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import ua.startup.smartcounter.R;
 import ua.startup.smartcounter.adapters.EventAdapter;
+import ua.startup.smartcounter.entities.ActivityEvent;
+import ua.startup.smartcounter.entities.DateEvent;
 import ua.startup.smartcounter.entities.Event;
 
 import java.util.ArrayList;
@@ -25,12 +28,9 @@ public class MainActivity extends Activity {
 
         listView = (ListView) findViewById(R.id.actions);
 
-        List<Event> events = Event.listAll(Event.class);
+        List<ActivityEvent> activityEvents = getActivityEvents();
 
-//        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-//                android.R.layout.simple_list_item_1, android.R.id.text1, getArrayEventsForListView(events));
-
-        final EventAdapter adapter = new EventAdapter(this, events);
+        final EventAdapter adapter = new EventAdapter(this, activityEvents);
 
         // Assign adapter to ListView
         listView.setAdapter(adapter);
@@ -53,8 +53,9 @@ public class MainActivity extends Activity {
                         EditText textField = (EditText) dialog.findViewById(R.id.action_field);
                         Event event = new Event(textField.getText().toString());
                         event.save();
+                        ActivityEvent activityEvent = new ActivityEvent(event, new ArrayList<DateEvent>());
 
-                        adapter.add(event);
+                        adapter.add(activityEvent);
                         adapter.notifyDataSetChanged();
                         dialog.dismiss();
                     }
@@ -78,14 +79,17 @@ public class MainActivity extends Activity {
         super.onStart();
     }
 
-    private List<String> getArrayEventsForListView(List<Event> events) {
-        List<String> array = new ArrayList<>(events.size());
-
-        for (Event event : events) {
-            array.add(event.getName());
+    private List<ActivityEvent> getActivityEvents() {
+        List<Event> events = Event.listAll(Event.class);
+        if (events == null || events.isEmpty()) {
+            return new ArrayList<>();
+        } else {
+            List<ActivityEvent>  activityEvents = new ArrayList<>();
+            for (Event event : events) {
+                ActivityEvent activityEvent = new ActivityEvent(event, DateEvent.find(DateEvent.class, "EVENT_NAME = ?", event.getEventName()));
+                activityEvents.add(activityEvent);
+            }
+            return activityEvents;
         }
-
-        return array;
     }
-
 }

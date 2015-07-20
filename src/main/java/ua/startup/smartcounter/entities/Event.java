@@ -10,35 +10,20 @@ import java.util.List;
  */
 public class Event extends SugarRecord<Event> {
 
-    private String name;
-    private List<DateEvent> dateEvents;
+    private String eventName;
 
     public Event() {
     }
 
-    public Event(String name) {
-        this.name = name;
-        this.dateEvents = new ArrayList<>();
+    public Event(String eventName) {
+        this.eventName = eventName;
     }
 
-    public Event(String name, List<DateEvent> counter) {
-        this.name = name;
-        this.dateEvents = counter;
+    public String getEventName() {
+        return eventName;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<DateEvent> getDateEvents() {
-        return dateEvents;
-    }
-
-    public void setDateEvents(List<DateEvent> dateEvents) {
-        this.dateEvents = dateEvents;
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 }
