@@ -6,7 +6,7 @@
               android:background="@android:color/background_dark">
     <EditText
             android:inputType="text"
-            android:maxLength="20"
+            android:maxLength="14"
             android:id="@+id/action_field"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

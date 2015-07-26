@@ -9,15 +9,15 @@ import org.joda.time.DateTime;
 public class DateEvent extends SugarRecord<DateEvent> {
 
     private DateTime recordTime;
-    private String eventName;
+    private Long eventId;
 
     public DateEvent() {
         this.recordTime = DateTime.now();
     }
 
-    public DateEvent(String eventName) {
+    public DateEvent(Long eventId) {
         this.recordTime = DateTime.now();
-        this.eventName = eventName;
+        this.eventId = eventId;
     }
 
     public DateTime getRecordTime() {
@@ -28,11 +28,11 @@ public class DateEvent extends SugarRecord<DateEvent> {
         this.recordTime = recordTime;
     }
 
-    public String getEventName() {
-        return eventName;
+    public Long getEventId() {
+        return eventId;
     }
 
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
+    public void setEventId(Long eventId) {
+        this.eventId = eventId;
     }
 }

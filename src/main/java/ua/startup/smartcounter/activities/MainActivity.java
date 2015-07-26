@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
+import org.joda.time.DateTime;
 import ua.startup.smartcounter.R;
 import ua.startup.smartcounter.adapters.EventAdapter;
 import ua.startup.smartcounter.entities.ActivityEvent;
@@ -51,7 +52,7 @@ public class MainActivity extends Activity {
                     @Override
                     public void onClick(View v) {
                         EditText textField = (EditText) dialog.findViewById(R.id.action_field);
-                        Event event = new Event(textField.getText().toString());
+                        Event event = new Event(textField.getText().toString(), DateTime.now());
                         event.save();
                         ActivityEvent activityEvent = new ActivityEvent(event, new ArrayList<DateEvent>());
 
@@ -84,7 +85,7 @@ public class MainActivity extends Activity {
         if (events == null || events.isEmpty()) {
             return new ArrayList<>();
         } else {
-            List<ActivityEvent>  activityEvents = new ArrayList<>();
+            List<ActivityEvent> activityEvents = new ArrayList<>();
             for (Event event : events) {
                 ActivityEvent activityEvent = new ActivityEvent(event, DateEvent.find(DateEvent.class, "EVENT_NAME = ?", event.getEventName()));
                 activityEvents.add(activityEvent);

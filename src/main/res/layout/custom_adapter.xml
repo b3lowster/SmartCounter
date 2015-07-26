@@ -2,17 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
               android:layout_width="match_parent"
-              android:layout_height="match_parent" android:baselineAligned="false">
+              android:layout_height="wrap_content" android:baselineAligned="false">
 
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_weight="2"
             android:orientation="horizontal"
             android:gravity="start">
         <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:id="@+id/activity_name"
                 android:layout_marginLeft="10dp"
                 android:textSize="25dp"
@@ -23,10 +23,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_weight="8">
+            android:layout_weight="4">
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/activity_increase"
+                android:text="+"
+                android:textSize="25dp"
+                android:gravity="center_vertical|center_horizontal"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal"
+            android:layout_weight="4">
         <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:id="@+id/activity_number"
                 android:textSize="25dp"
                 android:gravity="center_vertical|center_horizontal"/>
